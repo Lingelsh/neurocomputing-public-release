@@ -1,0 +1,108 @@
+{
+  "started_at_utc": "2026-09-29T05:57:12.071264+00:00",
+  "settings": {
+    "width": 128,
+    "stride": 64,
+    "max_input": 512,
+    "r_ins": 1
+  },
+  "tokenizer_digest": "493e580aa9a8b6b7c49033206471eb6aa10e4919182e9899730dabb02b41b4e4",
+  "script_sha256": "4a3ac37fa5c06bd3e25177516d255a05c0a58ed1d77012668336d1e00520299b",
+  "module_sha256": "4c6d4dd157e46fb211228fc6b55a6e67e9e1cd7c486f73cb14141c36004bd116",
+  "inputs": {
+    "primevul_train_paired.jsonl": "22d2f27ffda164d7de81f870f6a4907c66df2338f6a9fd01ee2300d7fb34f965",
+    "primevul_valid_paired.jsonl": "33b18631d7b5c075ee143527176fddf2180648901ed40952553d99f744c6c74f",
+    "primevul_test_paired.jsonl": "54a16a5ab663d11d1ffa5f48a98b0f996e82ee85f48a2b999334f6c1a7d96e41"
+  },
+  "splits": {
+    "train": {
+      "paired_ids": 8703,
+      "missing_in_main": 0,
+      "mismatched": 0,
+      "examples": [],
+      "pairs": 4354,
+      "distinct_vuln": 4354,
+      "distinct_fixed": 4349,
+      "vuln_also_fixed": 0,
+      "identical_after_normalization": 0,
+      "no_located_block": 26,
+      "has_signature_only_block": 163,
+      "has_blank_only_block": 91,
+      "located_pairs": 4328,
+      "pairs_with_hard_negatives": 4321,
+      "blocks_located": 11417,
+      "blocks_covered_by_one_window": 11081,
+      "block_span_quantiles": {
+        "0.25": 11.0,
+        "0.5": 19.0,
+        "0.75": 31.0,
+        "0.9": 51.0
+      },
+      "positive_windows": 19951,
+      "hard_negative_windows": 23492,
+      "positive_windows_in_short_functions_le160": 305,
+      "positive_windows_in_stratum5": 15940
+    },
+    "valid": {
+      "paired_ids": 1120,
+      "missing_in_main": 0,
+      "mismatched": 0,
+      "examples": [],
+      "pairs": 562,
+      "distinct_vuln": 562,
+      "distinct_fixed": 558,
+      "vuln_also_fixed": 0,
+      "identical_after_normalization": 0,
+      "no_located_block": 4,
+      "has_signature_only_block": 32,
+      "has_blank_only_block": 9,
+      "located_pairs": 558,
+      "pairs_with_hard_negatives": 558,
+      "blocks_located": 1284,
+      "blocks_covered_by_one_window": 1239,
+      "block_span_quantiles": {
+        "0.25": 11.0,
+        "0.5": 19.0,
+        "0.75": 33.25,
+        "0.9": 52.0
+      },
+      "positive_windows": 2256,
+      "hard_negative_windows": 2677,
+      "positive_windows_in_short_functions_le160": 45,
+      "positive_windows_in_stratum5": 1715
+    },
+    "test": {
+      "paired_ids": 1126,
+      "missing_in_main": 0,
+      "mismatched": 0,
+      "examples": [],
+      "pairs": 564,
+      "distinct_vuln": 564,
+      "distinct_fixed": 562,
+      "vuln_also_fixed": 0,
+      "identical_after_normalization": 0,
+      "no_located_block": 3,
+      "has_signature_only_block": 15,
+      "has_blank_only_block": 17,
+      "located_pairs": 561,
+      "pairs_with_hard_negatives": 561,
+      "blocks_located": 1282,
+      "blocks_covered_by_one_window": 1244,
+      "block_span_quantiles": {
+        "0.25": 11.0,
+        "0.5": 19.0,
+        "0.75": 32.0,
+        "0.9": 51.0
+      },
+      "positive_windows": 2221,
+      "hard_negative_windows": 2744,
+      "positive_windows_in_short_functions_le160": 42,
+      "positive_windows_in_stratum5": 1753
+    }
+  },
+  "outputs": {
+    "primevul_pairs.parquet": "2e671f2acf676c8ad567d9b7a52187052f90af8b0521c8bcc7d5c9c96f32cf70",
+    "coverage_by_stratum.csv": "b0e59dc68991e2c00134aeea44feabfa5aab3b7a46ca137e279d8edaf03847f6"
+  },
+  "seconds": 31.170153856277466
+}

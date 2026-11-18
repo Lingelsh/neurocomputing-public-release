@@ -1,0 +1,14 @@
+{
+  "train": {
+    "filename": "bigvul_train.jsonl",
+    "sha256": "7a5462de59fa389be5c2d4ebe7ac07153443ede01ca0e8c95d1b689215aa5f30"
+  },
+  "valid": {
+    "filename": "bigvul_valid.jsonl",
+    "sha256": "44f95c0f835f2d7a701ca1a95f05781e1a8bb48ad6fd67c28a88c2f862f87e52"
+  },
+  "test": {
+    "filename": "bigvul_test.jsonl",
+    "sha256": "bf817f69fe9b09e18460e3fb5d37592089e58d92c6642c394468c305458bcbd4"
+  }
+}

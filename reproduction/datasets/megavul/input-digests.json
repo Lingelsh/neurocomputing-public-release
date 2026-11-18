@@ -1,0 +1,14 @@
+{
+  "train": {
+    "filename": "megavul_train.jsonl",
+    "sha256": "4133f7e661b8cc308b7eee2a7a1cf4e1b3a519bc6ac058316056ff1a84418db3"
+  },
+  "valid": {
+    "filename": "megavul_valid.jsonl",
+    "sha256": "ed8f98113e124ef575795262f720798c8ca64c98afb4296240597ff5f06879ff"
+  },
+  "test": {
+    "filename": "megavul_test.jsonl",
+    "sha256": "fc7772bfcdc745870b76fecff473be4ff1d8188ef54ec30fbc90114de9e023f4"
+  }
+}

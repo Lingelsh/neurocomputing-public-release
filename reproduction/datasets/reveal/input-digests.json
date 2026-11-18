@@ -1,0 +1,14 @@
+{
+  "train": {
+    "filename": "reveal_train.jsonl",
+    "sha256": "e803eceb7345a7f04efa9c95678e5d0493129595c9772e3c88d82f8260f661db"
+  },
+  "valid": {
+    "filename": "reveal_valid.jsonl",
+    "sha256": "81740e40fbd2852319b02bc0754dfa278e26d74b3790240c24f809ce8bcaf9fd"
+  },
+  "test": {
+    "filename": "reveal_test.jsonl",
+    "sha256": "04ceeeaf075a247a34a0094b4649665dc852c0160bbc3ab33b3f9cb016af282d"
+  }
+}
