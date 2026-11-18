@@ -20,6 +20,15 @@ You can run it as follows:
 python examples/run_inference.py
 ```
 
+## Preparing Data
+
+We have provided a generic data preparation script in `scripts/prepare_dataset.py`.
+It expects a CSV input with `idx`, `func`, and `target` columns:
+
+```bash
+python scripts/prepare_dataset.py --input path/to/data.csv --output path/to/output_dir
+```
+
 Please customize the dataset loading and model paths within the script to match your specific requirements.
 
 ## Data Structure
