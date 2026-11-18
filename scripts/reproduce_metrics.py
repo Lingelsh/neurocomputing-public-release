@@ -114,17 +114,19 @@ def evaluate_transformations():
         for filler, part in rows.loc[rows.filler.notna()].groupby("filler"):
             padded = part.loc[part.cond.eq("pad")]
             equal = aligned(padded.loc[padded.k.eq(1)])
-            control = aligned(part.loc[part.cond.eq("placebo")])
-            dose = [baseline]
-            for amount in reported["dose_multipliers"][1:]:
-                longer = aligned(padded.loc[padded.k.eq(amount)])
-                dose.append(estimate(wins(longer.s_v.to_numpy(), longer.s_f.to_numpy())))
+            dose = {}
+            for amount, inputs in padded.groupby("k"):
+                scored = aligned(inputs)
+                dose[str(float(amount))] = estimate(wins(scored.s_v.to_numpy(), scored.s_f.to_numpy()))
             fillers[filler] = {
                 "dose": dose,
-                "both_padded": estimate(wins(control.s_v.to_numpy(), control.s_f.to_numpy())),
                 "length_only": estimate(wins(original.s_v.to_numpy(), equal.s_v.to_numpy())),
                 "content_only": estimate(wins(equal.s_v.to_numpy(), equal.s_f.to_numpy())),
             }
+            control = part.loc[part.cond.eq("placebo")]
+            if not control.empty:
+                scored = aligned(control)
+                fillers[filler]["both_padded"] = estimate(wins(scored.s_v.to_numpy(), scored.s_f.to_numpy()))
         results[model] = {"original": baseline, "fillers": fillers}
     if results != reported["models"]:
         raise ValueError("Recomputed transformation results differ from the archived results")

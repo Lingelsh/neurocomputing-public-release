@@ -30,7 +30,7 @@ Each `scores/<dataset>-<split>.parquet` contains one record per validation or te
 
 `transformations/cohort.csv` identifies the 133 analysed pairs, including 74 validation and 59 test pairs. The `pair` column in the Parquet files is the vulnerable PrimeVul ID. `selection-flags.parquet` records the exact-length and visibility criteria for each condition used to select the cohort. A candidate must pass the criteria for all five detectors.
 
-`transformations/scores.parquet` contains the stored scores `s_v` and `s_f` for the two versions in each reported condition. `cond` is the original pair, padding of the vulnerable side, or both sides padded. `filler` identifies sampled real comments (`corpus`), generated comments (`llm`), unused variable declarations (`decl`), or hyphen-only comments (`dash`). `k` is the padding dose as a multiple of the fix-induced token gap. The recomputation script verifies the selected cohort and compares the bootstrap summaries with `reported-results.json`.
+`transformations/scores.parquet` contains the stored scores `s_v` and `s_f` for the original, padded, and both-padded pairs reported in the paper. It includes the sampled-comment dose curve and four-filler controls for the four baseline detectors, plus CFVul's equal-length contrasts. `filler` identifies sampled real comments (`corpus`), generated comments (`llm`), unused variable declarations (`decl`), or hyphen-only comments (`dash`). `k` gives the padding dose as a multiple of the fix-induced token gap. The recomputation script verifies the cohort and checks the bootstrap summaries in `reported-results.json`, where `dose` is keyed by multiplier.
 
 ## Run settings
 

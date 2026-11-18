@@ -1,33 +1,31 @@
-# NeuroComputing (MVP Release)
+# CFVul
 
-This repository contains the Minimal Viable Product (MVP) release of the core modeling, inference, and data preparation code for the NeuroComputing project.
+Code and evaluation data for *Mitigating fix reversal: Counterfactual constraints for function-level vulnerability detection*. This repository includes the CFVul implementation, PrimeVul training configurations, and the data needed to recompute the reported evaluation metrics.
 
-## MVP Scope
+## Recompute evaluation metrics
 
-This release is intended for reproducibility and data availability compliance. It includes:
-- **Core Library**: `src/neurobaseline/` (model structures, data processing, metrics).
-- **Configuration**: A template `configs/global.json` for customized runs.
-- **Inference Example**: `examples/run_inference.py` (a starting point for running model inference).
-- **Data Prep Tool**: `scripts/prepare_dataset.py` (standardized preprocessing for your custom datasets).
+Use Python 3.11 or newer. The frozen score tables can be evaluated on CPU without downloading datasets or model weights.
 
-## Quickstart
+```sh
+python -m pip install -r requirements.txt
+python scripts/reproduce_metrics.py > paper-metrics.csv
+python scripts/reproduce_metrics.py --transformations > transformation-metrics.json
+```
 
-1. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+The [data documentation](reproduction/README.md) describes the upstream datasets, paper splits, score columns, and code-transformation conditions.
 
-2. **Prepare Data**:
-   Use the provided script to format your raw data into the expected JSONL structure:
-   ```bash
-   python scripts/prepare_dataset.py --input <path_to_data.csv> --output <data_dir>
-   ```
+## Train on PrimeVul
 
-3. **Run Inference**:
-   Configure `configs/global.json` and run the inference template:
-   ```bash
-   python examples/run_inference.py
-   ```
+Download the official original-release PrimeVul splits from the [upstream repository](https://github.com/DLVulDet/PrimeVul#-primevul-dataset) and the CodeBERT revision recorded in the [checkpoint metadata](reproduction/protocol/primevul-checkpoints.json). The training configurations target CUDA.
 
-## Security & Privacy Note
-This code has been sanitized for public release. Internal paths, sensitive tokens, and environment-specific experiment configurations have been removed.
+```sh
+python scripts/prepare_dataset.py --input path/to/official/primevul --output data/primevul
+export PYTHONPATH=src
+python -m neurobaseline train --config configs/primevul-codebert.json --model path/to/codebert --local-files-only
+python -m neurobaseline train --config configs/primevul-cfa.json --model path/to/codebert --local-files-only
+python -m neurobaseline score --run runs/primevul-cfa/cfa/seed13 --split test --device cuda
+```
+
+## License
+
+The repository code and documentation are available under the [MIT license](LICENSE). Obtain the datasets and pretrained model from their upstream maintainers under their respective terms.
