@@ -1,20 +1,19 @@
 # Reproduction data
 
-The files in this directory contain sample IDs, labels, token lengths, split membership, fix-pair metadata, and scores. Obtain function bodies and original datasets from their upstream releases.
+This directory contains frozen validation and test scores for the four datasets, test fix pairs for ranking, and the full PrimeVul fix-pair table for training. Obtain function bodies and original datasets from their upstream releases.
 
-| Dataset | Upstream | Partition used in the paper | Train / validation / test fix pairs |
+| Dataset | Upstream | Partition used in the paper | Test fix pairs in this bundle |
 | --- | --- | --- | --- |
-| PrimeVul | [PrimeVul repository](https://github.com/DLVulDet/PrimeVul#-primevul-dataset) | Official original-release split | 4,354 / 562 / 564 |
-| BigVul | [MSR 2020 dataset](https://github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset) | Fixing-commit split with whitespace normalization and fixed versions added | 8,229 / 1,199 / 1,222 |
-| ReVeal | [ReVeal repository](https://github.com/VulDetProject/ReVeal) | Fixing-commit split after removing duplicates and label conflicts | 1,369 / 197 / 195 |
-| MegaVul | [MegaVul repository](https://github.com/Icyrockton/MegaVul) | April 2024 C/C++ release, fixing-commit split after whitespace normalization and deduplication | 12,768 / 1,500 / 1,712 |
+| PrimeVul | [PrimeVul repository](https://github.com/DLVulDet/PrimeVul#-primevul-dataset) | Official original-release split | 564 |
+| BigVul | [MSR 2020 dataset](https://github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset) | Fixing-commit split with whitespace normalization and fixed versions added | 1,222 |
+| ReVeal | [ReVeal repository](https://github.com/VulDetProject/ReVeal) | Fixing-commit split after removing duplicates and label conflicts | 195 |
+| MegaVul | [MegaVul repository](https://github.com/Icyrockton/MegaVul) | April 2024 C/C++ release, fixing-commit split after whitespace normalization and deduplication | 1,712 |
 
-## Dataset records
+## Fix pairs and PrimeVul training inputs
 
-- Each `datasets/<dataset>/splits.parquet` records the exact `idx`, `target`, and `split` for every function used in the paper. For the three commit-grouped datasets, `commit_group_sha256` is the SHA-256 digest of the fixing-commit identifier when available.
-- `input-digests.json` records the SHA-256 of each original PrimeVul split file or of each prepared split file for the other datasets. IDs refer to the authors' dataset records. PrimeVul uses upstream `idx`. BigVul uses the original CSV row identifier, prefixed with `f` for added fixed functions. ReVeal uses the original per-file row index, prefixed with `v` or `n` for the vulnerable and non-vulnerable source files. MegaVul IDs refer to the source record position and the retained version.
-- Each `<dataset>_pairs.parquet` records `vuln_idx` and `fixed_idx`, the matching split, original token lengths, and the window annotations. `positive_windows` and `hard_negative_windows` contain zero-based window indices on the vulnerable and fixed sides, respectively. The PrimeVul table is the exact training input and is accompanied by its original manifest and coverage report.
-- `datasets/bigvul/training-adjustments.parquet` marks which original training IDs are retained in each of the three reported BigVul training interventions. Each intervention uses the same original validation and test sets.
+- The BigVul, ReVeal, and MegaVul pair tables contain test pairs only. Each row records `split`, `vuln_idx`, `fixed_idx`, `n_tokens`, and `fixed_n_tokens` for joining test scores and measuring pairwise changes in length.
+- IDs follow the dataset records. PrimeVul uses upstream `idx`. BigVul uses the original CSV row identifier, prefixed with `f` for added fixed functions. ReVeal uses the original per-file row index, prefixed with `v` or `n`. MegaVul IDs refer to the source record position and the retained version.
+- `datasets/primevul/primevul_pairs.parquet` retains all 4,354 training, 562 validation, and 564 test pairs with their window annotations. `positive_windows` and `hard_negative_windows` contain zero-based window indices on the vulnerable and fixed sides, respectively. The original manifest records its settings and digest, and `coverage_by_stratum.csv` records the annotation coverage. `input-digests.json` records the SHA-256 of the original PrimeVul split files.
 - `datasets/primevul/test-fix-positions.parquet` gives the first fix token offset and whether the entire fix lies in the prefix. Negative offsets denote unavailable positions.
 
 ## Frozen scores
